@@ -421,6 +421,8 @@ SQL> alter session set nls_date_format='dd-MON-rr';
 
 ## Day04 
 
+### 조인
+
 - 관계형 데이터베이스
     - 관련된 데이터를 테이블 형태로 저장하고, 테이블간 관계를 통해 데이터를 관리하는 DB모델
     - 테이블 - 데이터를 저장하는 구조. Table/Entity
@@ -440,8 +442,7 @@ SQL> alter session set nls_date_format='dd-MON-rr';
     - FK - EMP.DEPTNO
     - 일반컬럼 - 그외 나머지 컬럼
     - 부자관계 - DEPT(부), EMP(자)
-
-### 조인
+    
 
 - 조인 계속 - [쿼리](./day04/1.조인다시.sql)
     - 등가조인 - `내부조인`, `Inner Join`, Equi Join
