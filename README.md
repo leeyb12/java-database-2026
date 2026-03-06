@@ -615,10 +615,12 @@ SQL> alter session set nls_date_format='dd-MON-rr';
 
 ### DDL 
 
-- DDL 명령어 계속
+- DDL 명령어 계속 - [쿼리](./day06/1.DDL.sql)
     - 5일차와 동일
 
 ### 객체 
+
+- [쿼리](./day06/2.Object.sql)
 
 - 데이터 사전 - 일반 테이블 외 DB를 운영하는 데 필요한 특수한 테이블
     - USER_XXXX - 현재 DB에 접속한 사용자가 소유한 객체 정보
@@ -693,9 +695,9 @@ SQL> alter session set nls_date_format='dd-MON-rr';
 
 - 동의어 - 생략
 
-### 제약조건
+### 제약조건 
 
-- 제약조건
+- 제약조건 - [쿼리](./day06/3.제약조건.sql)
     - 테이블에 저장할 데이터를 정확하게 규제하는 특수한 규칙
     - 조건에 맞지 않는 데이터를 걸러내는 기능
 
@@ -725,4 +727,14 @@ SQL> alter session set nls_date_format='dd-MON-rr';
 
 ## Day07
 
+### 사용자, 권한, 롤
 
+### PL/SQL 
+
+### 커서, 예외처리
+
+### 프로시저, 함수
+
+### 파이썬 오라클 연동
+
+### DB설계
