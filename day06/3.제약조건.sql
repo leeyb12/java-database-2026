@@ -101,13 +101,13 @@ INSERT INTO emp (empno, ename, deptno)
 VALUES (9997, '성유고', 80);
 
 -- FK 생성
-CREATE TABLE dept_fk (
+CREATE TABLE dept_fk (  -- PK용
 	deptno NUMBER CONSTRAINT dept_fk_deptno_PK PRIMARY KEY,
 	dname varchar2(20),
 	loc   varchar2(13)
 );
 
-CREATE TABLE emp_fk (  -- FK지정용
+CREATE TABLE emp_fk (   -- FK지정용
 	empno NUMBER PRIMARY KEY,  -- PK이름 자동생성
 	ename varchar2(20) NOT NULL,
 	job   varchar2(10),
@@ -157,3 +157,69 @@ INSERT INTO TBL_DFT (login_id, tel)
 VALUES ('ashely83', '010-9999-9898');
 
 SELECT * FROM tbl_dft;
+
+
+-- 중요! CASCADE
+-- FK 생성
+CREATE TABLE dept_fk (  -- PK용
+	deptno NUMBER CONSTRAINT dept_fk_deptno_PK PRIMARY KEY,
+	dname varchar2(20),
+	loc   varchar2(13)
+);
+
+CREATE TABLE emp_fk (   -- FK지정용
+	empno NUMBER PRIMARY KEY,  -- PK이름 자동생성
+	ename varchar2(20) NOT NULL,
+	job   varchar2(10),
+	mgr NUMBER,
+	deptno NUMBER CONSTRAINT empfk_deptno_fk REFERENCES dept_fk(deptno) NOT NULL 
+);
+
+CREATE TABLE emp_fk (   -- FK지정용
+	empno NUMBER PRIMARY KEY,  -- PK이름 자동생성
+	ename varchar2(20) NOT NULL,
+	job   varchar2(10),
+	mgr NUMBER,
+	deptno NUMBER NOT NULL 
+		CONSTRAINT empfk_deptno_fk
+		REFERENCES dept_fk(deptno)
+		ON DELETE CASCADE  -- 부모의 pk값을 지우면 해당데이터도 같이삭제
+);
+
+
+SELECT * FROM dept_fk;
+SELECT * FROM emp_fk;
+
+-- 기존 제약조건 삭제
+ALTER TABLE emp_fk
+DROP CONSTRAINT empfk_deptno_fk;
+
+-- cascade로 재설정
+ALTER TABLE emp_fk
+ADD CONSTRAINT empfk_deptno_fk
+    FOREIGN KEY (deptno)
+    REFERENCES dept_fk(deptno)
+    ON DELETE CASCADE;
+
+-- 전부 초기화
+TRUNCATE TABLE emp_fk;
+TRUNCATE TABLE dept_fk;
+
+INSERT ALL 
+  INTO dept_fk (deptno, dname, loc) VALUES (10, 'DEV', 'SEOUL')
+  INTO dept_fk (deptno, dname, loc) VALUES (20, 'ACCOUNTING', 'INCHEON')
+  INTO dept_fk (deptno, dname, loc) VALUES (30, 'FINANCE', 'BUSAN')
+ SELECT * FROM dual;
+
+INSERT INTO emp_fk (empno, ename, deptno)
+VALUES (1000, '성유고', 20);
+
+INSERT INTO emp_fk (ename, ename, deptno, job, mgr)
+VALUES (2000, '애슐리', 30, 'PRESIDENT', NULL);
+
+-- cascade 핵심
+DELETE FROM dept_fk
+ WHERE deptno = 20;
+
+SELECT * FROM dept_fk;
+SELECT * FROM emp_fk;
