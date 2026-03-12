@@ -1181,7 +1181,7 @@ SQL> alter session set nls_date_format='dd-MON-rr';
         - ~~`퇴원` - `환자`가 `병실`에서 퇴원~~
         - 다대다(n:m) 관계는 만들지 않음. 물리 DB에서 이를 구현할 수도 없음
 
-    <!-- ![alt text](image-22.png) -->
+            ![alt text](./day09/img/image-8.png)
 
 #### 논리설계
 
@@ -1237,7 +1237,7 @@ SQL> alter session set nls_date_format='dd-MON-rr';
 
     ![alt text](./day09/img/image-4.png)
 
-6. 내보내기 클릭
+6. 내보내기 클릭 - [쿼리](./day09/3.병원물리스키마_비식별관계.sql)
     - DB종류 선택 - 현재 Oracle
     - PK제약조건, FK제약조건, 비식별 제약조건 추가 선택
     - SQL 미리보기 클릭 후, 미리보기 복사
@@ -1259,3 +1259,15 @@ SQL> alter session set nls_date_format='dd-MON-rr';
 ## Day10
 
 ### 인덱스 연습 프로젝트
+
+- 개요
+    - 인덱스이 필요성, 성능 확인
+    - 인덱스 없이 조회는 느림, 인덱스를 생성 조회 빠름
+    - 아무 컬럼에나 인덱스걸면 안됨 -> 반대로 조회 느려짐
+    - 보통 `인덱스를 건다`라고 이야기함
+
+#### 테스트 실행 순서
+
+- 주문 테이블 생성 - ORDERS_BIG - [쿼리](./day10/1.인덱스테스트용_테이블.sql)
+- 300만건 더미데이터 생성 - [쿼리](./day10/2.300만건테이터.sql)
+- 인덱스 테스트 - [쿼리](./day10/3.인덱스테스트_쿼리.sql)
